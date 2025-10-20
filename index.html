@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Dhun - Web service:Music for fun</title>
+   <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="uitlity.css">
+   <link rel="icon" type="image/x-icon" href="assets/favicon.svg">
+</head>
+
+<body>
+   <div>
+      <nav class="navbar flex roundBorder">
+         <img class="click-to-home pointer" src="assets/logo.svg" alt="Dhun">
+         <img class="pointer click-to-home" src="assets/home.svg" alt="home">
+
+         <div class="flex searchBox center">
+            <input type="text" name="keyword" value="" placeholder=" 🔍 Search">
+         </div>
+         <div class="normal-bold options">
+            <li class="Premium option">Premium</li>
+            <li class="Support option">Support</li>
+            <li class="Download option">⬇ Download</li>
+         </div>
+         <div class="usr-in">
+            <li class="semi-bold sign">Sign up</li>
+            <li class="semi-bold log">Log in</li>
+         </div>
+      </nav>
+   </div>
+
+   <div class="Container flex">
+
+      <div class="left panal flex roundBorder">
+         <div class="library">
+            <ul>
+               <li><img src="assets/library.svg" alt="library">Your Library</li>
+               <li><img src="assets/plus.svg" alt=""></li>
+            </ul>
+            <div class="collection-cards">
+               <div class="cards">
+                  <div class="card card1">
+                     <ul>
+                        <li class="bold">Create your first playlist</li>
+                        <li class="normal-bold">It's easy, we'll help you</li>
+                        <button class="create-playlist" type="button">Create playlist</button>
+                     </ul>
+                  </div>
+               </div>
+               <div class="cards">
+                  <div class="card card2">
+                     <ul>
+                        <li class="bold">Let's find some podcasts to follow</li>
+                        <li class="normal-bold">We'll keep you on new episodes</li>
+                        <button class="create-playlist" type="button">Browse podcasts</button>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="left-footer">
+            <footer>
+               <ul class="footer-items list-style-none">
+                  <li>Legal</li>
+                  <li>Safety & Privacy center</li>
+                  <li>Privacy policy</li>
+                  <li>Cookies</li>
+                  <li>About Ads</li>
+                  <li>Accessibilty</li>
+                  <button type="button" class="language"><img src="assets/language.svg" alt="lang">English</button>
+               </ul>
+            </footer>
+         </div>
+      </div>
+      <!-- //Left panal is done -->
+      <div class="right panal flex roundBorder">
+         <div class="song-playlist">
+            <h1 class="pointer on-hover-underline">Dhun Playlist</h1>
+            <div class="songcard-container">
+
+               <div class="songcard">
+                  <img class="album-img" src="assets/cardimg1.png" alt="img">
+                  <img class="play" src="assets/playbutton.svg" alt="play">
+                  <h3 class="pointer on-hover-underline">Album name</h3>
+                  <ul class="list-style-none artist-names">
+                     <li class="pointer click-to-home on-hover-underline">tag1,</li>
+                     <li class="pointer click-to-home on-hover-underline">tag2,</li>
+                     <li class="pointer click-to-home on-hover-underline">tag3</li>
+                  </ul>
+               </div>
+
+            </div>
+         </div>
+         <div class="playmenu">
+            <img class="previous_song" src="assets/previous_song.svg" alt="back">
+            <div class="play_song_container">
+               <img class="play_song" src="assets/play.svg" alt="play">
+               <img src="assets/pause.svg" alt="pause">
+            </div>
+            <img class="next_song" src="assets/next_song.svg" alt="next">
+         </div>
+      </div>
+
+   </div>
+
+
+   <script src="script.js"></script>
+</body>
+
+</html>

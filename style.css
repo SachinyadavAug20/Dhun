@@ -1,0 +1,384 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+   font-family: "Poppins", sans-serif;
+   transition: all 0.1s ease-in-out;
+   margin: 0;
+   padding: 0;
+}
+
+body {
+   background-color: black;
+}
+
+.panal {
+   margin: 2px;
+   padding: 5px;
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+}
+
+.Container {
+   padding: 5px;
+}
+
+.left {
+   background-color: red;
+   width: 20vw;
+   background-color: #121212;
+   max-height: 92.5vh;
+   overflow-y: scroll;
+   overflow-x:hidden;
+}
+
+.right {
+   background-color: yellow;
+   width: 80vw;
+   max-height: 92.5vh;
+   background-color: #212121;
+}
+
+.navbar {
+   width: (100vw-10px);
+   height: 7.5vh;
+   padding: 5.5px;
+   gap: 10px;
+   box-sizing: border-box;
+   background-color: black;
+   justify-content: space-between;
+}
+
+.center {
+   margin: 0 auto;
+   /* pushes left and right apart, stays centered */
+}
+
+.searchBox {
+   padding: 3px;
+   border: 2px solid black;
+   border-radius: 20px;
+   background-color: hsl(221, 16%, 27%);
+   cursor: pointer;
+   width: 29%;
+   align-items: space-between;
+}
+
+.searchBox input {
+   border-radius: inherit;
+   padding: 1px;
+   width: 100%;
+   box-sizing: border-box;
+   background-color: hsl(221, 16%, 27%);
+   font-size: 18px;
+   font-weight: 600;
+   border: 3px solid rgb(59, 66, 82);
+}
+
+.searchBox input:focus {
+   background-color: rgb(76, 86, 106);
+   border: 2px solid rgb(59, 66, 82);
+   outline: 2px solid rgb(76, 86, 106);
+   color: whitesmoke;
+   padding: 10px;
+}
+
+.navbar img:nth-child(2) {
+   background-color: rgb(59, 66, 82);
+   border-radius: 20px;
+   padding: 7.5px;
+}
+
+.navbar img:nth-child(2):hover {
+   background-color: rgb(76, 86, 106);
+   transform: scale(1.07);
+}
+
+.options {
+   color: white;
+   display: flex;
+   gap: 40px;
+   list-style: none;
+   align-self: center;
+}
+
+.option {
+   cursor: pointer;
+   color: gray;
+}
+
+.option:hover {
+   color: white;
+   transform: scale(1.15);
+}
+
+
+.Download {
+   display: flex;
+   align-self: center;
+}
+
+.usr-in {
+   display: flex;
+   color: white;
+   align-self: center;
+   list-style: none;
+   background-color: rgb(59, 66, 82);
+   border: 2px solid black;
+   border-radius: 25px;
+   align-items: center;
+   cursor: pointer;
+   width: 12.5%;
+   height: 100%;
+   margin: 12px;
+}
+
+.usr-in li:nth-child(1),
+.usr-in li:nth-child(2) {
+   height: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 100%;
+   border-radius: inherit;
+   align-self: center;
+}
+
+.usr-in li:nth-child(1):hover,
+.usr-in li:nth-child(2):hover {
+   color: whitesmoke;
+   border: 2px solid white;
+   background-color: rgba(176, 186, 196, .75);
+   transform: scale(1.07);
+   font-weight: bold;
+   color: black;
+}
+
+.left .library {
+   width: 95%;
+   padding: 10px;
+}
+
+.left .library ul {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   font-weight: 500;
+   font-size: 18px;
+   width: 100%;
+   color: white;
+}
+
+.left .library ul li {
+   display: flex;
+   align-items: center;
+   gap: 5px;
+}
+
+.left .library ul li:last-child {
+   cursor: pointer;
+}
+
+.left .library ul li img {
+   filter: invert(1);
+   width: 25px;
+}
+
+.cards {
+   margin-top: 45px;
+   margin-bottom: 25px;
+   padding: 15px;
+   display: flex;
+   gap: 25px;
+   width: 80%;
+   background-color: #1e1e1e;
+   flex-direction: column;
+   border: 2px solid rgb(76, 86, 106);
+   border-radius: 15px;
+}
+
+.cards .card ul {
+   display: flex;
+   gap: 15px;
+   flex-direction: column;
+   align-items: flex-start;
+}
+
+.cards .card button {
+   background-color: whitesmoke;
+   color: black;
+   font-weight: bolder;
+   border: 2px solid black;
+   border-radius: 30px;
+   padding: 5px 10px;
+   cursor: pointer;
+}
+
+.cards .card button:hover {
+   transform: scale(1.035);
+   text-shadow: 1px 1px 1px rgba(76, 86, 106, .25);
+   background-color: white;
+   transition: all 0.15s ease-in;
+}
+
+.left-footer {
+   width: 80%;
+   place-self: flex-start;
+}
+
+.left-footer .footer-items {
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   gap: 25px;
+   color: rgb(59, 66, 82);
+   font-family: Arial, Helvetica, sans-serif;
+   font-weight: 400;
+   font-size: 11px;
+}
+
+.left-footer .footer-items li:hover {
+   color: rgba(186, 186, 186, 0.99);
+   cursor: pointer;
+   font-size: (inherit+1px);
+   font-weight: 600;
+   transform: scale(1.015);
+}
+
+.left-footer .footer-items .language {
+   border: 2px solid rgb(134, 142, 150);
+   border-radius: 30px;
+   background-color: rgb(59, 66, 82);
+   display: flex;
+   align-items: center;
+   justify-content: space-evenly;
+   gap: 2px;
+   padding: 12px;
+   font-size: 12px;
+   font-weight: 700;
+   color: white;
+}
+
+.left-footer .footer-items .language img {
+   width: 15px;
+}
+
+.left-footer .footer-items .language:hover {
+   transform: scale(1.025);
+   border: 2.5px solid white;
+}
+
+/* left panal is done............................................................................. */
+
+.right {
+   display: flex;
+   flex-direction: column;
+   position: relative;
+}
+
+.right .song-playlist h1 {
+   font-family: "Orbitron", sans-serif;
+   padding: 15px;
+   color: white;
+   display: inline-block;
+}
+
+.songcard-container {
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   padding: 12px 19px;
+   width: 95%;
+   max-height: 65.5vh;
+   overflow-y:scroll;
+}
+
+.songcard {
+   background-color: inherit;
+   border: 2px solid inherit;
+   width: 180px;
+   padding: 15px 15px;
+   margin: 10px 12.5px;
+   box-sizing: border-box;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   position: relative;
+}
+
+.songcard:hover {
+   background-color: rgba(107, 103, 105, 0.43);
+   border: 2px solid rgb(76, 86, 106);
+   border-radius: 20px;
+   transform: scale(0.985);
+}
+
+.songcard img:first-child {
+   width: 100%;
+   border: 2px solid black;
+   border-radius: 20px;
+   object-fit: contain;
+}
+
+.songcard img.play {
+   position: absolute;
+   width: 45px;
+   left: 63%;
+   top: 48%;
+   opacity: 0;
+   transform: all 0.4s ease-in-out;
+}
+
+.songcard h3 {
+   place-self: flex-start;
+   font-weight: 600;
+   font-size: 18px;
+   color: white;
+   padding: 2px;
+}
+
+.songcard ul {
+   display: flex;
+   padding: 2px;
+   font-size: 12px;
+   justify-content: flex-start;
+   align-items: center;
+   gap: 5px;
+   color: rgba(155, 152, 154, 1);
+   font-weight: 400;
+   place-self: flex-start;
+}
+.playmenu{
+   position: absolute;
+   bottom: 2%;
+   background-color: lime;
+   width: 75%;
+   padding: 12px;
+   height: 7%;
+   place-self: center;
+   display: flex;
+   flex-direction: row;
+   flex-wrap: nowrap;
+   align-items: center;
+   justify-content: center;
+}
+.playmenu img{
+  object-fit: contain;
+   width: 45px;
+   padding: 4px;
+   cursor: pointer;
+}
+.playmenu .play_song_container{
+   position:relative;
+    transition: opacity 0.2s ease;
+}
+.play_song_container img:first-child{
+   opacity: 1;
+}
+.playmenu .play_song_container img:nth-child(2){
+   position: absolute;
+   left: 0px;
+   opacity: 0;
+}
