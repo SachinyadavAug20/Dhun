@@ -1,5 +1,12 @@
-#Dhun - Music on web-app
-##this a music web page in construction
-On 20-10-25 :
-![Image at 20-10-25](assets/screenshot/20-10-25.png)
+# Dhun – Web Music Player 🎵
+
+**Dhun** is a web-based music player currently under development. This project aims to create a simple and interactive interface for listening to music directly from your browser.
+
+---
+
+## Screenshot
+
+Here’s a preview of the current state (as of 25-10-2025):
+
+![Dhun Screenshot](assets/screenshot/20-10-25.png)
 
