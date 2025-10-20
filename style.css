@@ -36,7 +36,7 @@ body {
 .right {
    background-color: yellow;
    width: 80vw;
-   max-height: 92.5vh;
+   max-height: 90.5vh;
    background-color: #212121;
 }
 
@@ -235,6 +235,7 @@ body {
    color: rgb(59, 66, 82);
    font-family: Arial, Helvetica, sans-serif;
    font-weight: 400;
+   padding: 2px 10px;
    font-size: 11px;
 }
 
@@ -266,6 +267,7 @@ body {
 
 .left-footer .footer-items .language:hover {
    transform: scale(1.025);
+   margin-bottom: 15px;
    border: 2.5px solid white;
 }
 
@@ -352,17 +354,30 @@ body {
 }
 .playmenu{
    position: absolute;
-   bottom: 2%;
-   background-color: lime;
-   width: 75%;
+   bottom: 2.6%;
+   background-color: rgba(45, 237, 84, 0.76);
+   width: 65%;
    padding: 12px;
    height: 7%;
    place-self: center;
    display: flex;
+   gap: 5px;
    flex-direction: row;
-   flex-wrap: nowrap;
    align-items: center;
-   justify-content: center;
+   justify-content: space-between;
+   border-radius: 25px;
+   border: 2px solid rgba(42, 214, 76, 1);
+}
+.playmenu:hover{
+   
+   border: 2px solid rgba(42, 214, 76, 0.79);
+   border-radius: 30px;
+   background-color: rgba(45, 237, 84, 0.89);
+   transform: scale(1.05);
+}
+.playmenu .control_btn{
+   display: flex;
+   gap: 2px;
 }
 .playmenu img{
   object-fit: contain;
@@ -382,3 +397,35 @@ body {
    left: 0px;
    opacity: 0;
 }
+.popular_songs{
+   display: flex;
+   flex-direction: column;
+   gap: 2px;
+   padding: 0px 15px;
+   color: rgb(134, 142, 150);
+}
+.popular_songs ul:nth-child(2){
+   list-style: none;
+   display: flex;
+   align-items: flex-start;
+   flex-direction: column;
+}
+.popular_songs h5{
+   font-size: 18px;
+   padding: 2px 0px;
+}
+.popular_songs ul li{
+   list-style: none;
+   cursor: pointer;
+   font-size: 13px;
+   color: rgb(134, 142, 150);
+}
+.popular_songs h5:hover{
+   color: white;
+}
+.popular_songs li:hover{
+   color: white;
+   font-weight: 550;
+   transform: scale(1.025);
+}
+
