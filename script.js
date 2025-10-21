@@ -31,8 +31,10 @@ for (const a of playbutton) {
       a.nextElementSibling.style.transform = 'translateY(-25.5%)';
    })
 }
-function getsongs() {
-   let songs = [
+
+// Get all song file paths
+function getSongs() {
+   return [
       "songs/Blindfold.mp3",
       "songs/Electronic.mp3",
       "songs/Hit The Ground.mp3",
@@ -41,109 +43,145 @@ function getsongs() {
       "songs/Missing Life.mp3",
       "songs/Witch House.mp3"
    ];
-   return songs;
 }
 
-var song_number = 5;//default case 
-function look_for_usr_song_choice() {
-   //take user input on song choice
-   let j = getsongs().length;
-   for (let i = 0; i < j; i++) {
-      document.querySelector(`.song_name${i}`).addEventListener('click', () => {
-         song_number = i;
-         pause_song();
-         main();
-         console.log(song_number);
-      });
-   }
+// Global state
+let songNumber = 0;
+let audio = new Audio();
+let songs = getSongs();
 
-}
-let play_container = document.querySelector(".play_song_container");
-let playBtn = play_container.children[0];
-let pauseBtn = play_container.children[1];
-playBtn.style.opacity = 1;
-playBtn.style.pointerEvents = "auto";
-pauseBtn.style.opacity = 0;
-pauseBtn.style.pointerEvents = "none"
+// UI buttons
+const playContainer = document.querySelector(".play_song_container");
+const playBtn = playContainer.children[0];
+const pauseBtn = playContainer.children[1];
+const previousBtn = document.querySelector(".previous_song");
+const nextBtn = document.querySelector(".next_song");
+const seakbar = document.querySelector(".seakbar");
+const seakbar_ball = document.querySelector(".seakbar").querySelector(".circle");
 
-function list_songs() {
-   //try to list all songs
-   let song_name=get_song_name();
-   let songlist = document.querySelector(".songlist"), j = 0;
-   for (const _name of song_name) {
-      let li = document.createElement("li")
-      li.innerHTML = _name;
-      li.className = `song_name${j}`;
-      j++;
-      songlist.appendChild(li);
-   }
-
-}
-function get_song_name() {
-   let song_name = [];
-   for (const song of getsongs()) {
-      let address = song;
-      let from = address.indexOf("/songs/") + "/songs/".length;
-      let to = address.indexOf(".mp3");
-      address = address.slice(from, to).replaceAll("%20", " ");
-      song_name.push(address);
-   }
-   return song_name;
-}
-function pause_song(){
-   let songs=getsongs();
-   let audio = new Audio(songs[song_number]);
+// Default button states
+function setPlayButton(active) {
+   if (active) {
       playBtn.style.opacity = 1;
       playBtn.style.pointerEvents = "auto";
       pauseBtn.style.opacity = 0;
       pauseBtn.style.pointerEvents = "none";
-      audio.currentTime=0; 
-      audio.pause();
-
-   audio.pause;
-}
-function main() {
-   let songs = getsongs();
-   let song_name = get_song_name();
-   console.log(song_name);
-   let audio = new Audio(songs[song_number]);
-
-   let time_info = document.querySelector(".timeduration");
-   let song_info = document.querySelector(".songinfo");
-   playBtn.addEventListener('click', () => {
+   } else {
       playBtn.style.opacity = 0;
       playBtn.style.pointerEvents = "none";
       pauseBtn.style.opacity = 1;
       pauseBtn.style.pointerEvents = "auto";
-      audio.play();
-      let duration = audio.duration;
-      //convert seconds to minutes
-      let minutesT = parseInt(duration / 60);
-      let secondsT = parseInt(duration - (minutesT * 60));
-      if (minutesT < 10) { minutesT = `0${minutesT}` }
-      if (secondsT < 10) { secondsT = `0${secondsT}` }
-      time_info.innerHTML = `${minutesT}:${secondsT}`;
-      var total_time = `${minutesT}:${secondsT}`;
-      song_info.innerHTML = `${song_name[song_number]}`;
+   }
+}
+setPlayButton(true);//this is deafult case in start all pause
+
+// Get song names (remove path + extension)
+function getSongNames() {
+   return getSongs().map(path => {
+      return path.substring(path.lastIndexOf("/") + 1, path.lastIndexOf(".mp3"));
+   });
+}
+
+// List songs in UI
+function listSongs() {
+   const songNames = getSongNames();
+   const songList = document.querySelector(".songlist");
+   songList.innerHTML = "";
+
+   songNames.forEach((name, i) => {
+      const element = `
+      <div class="playcard playcard${i}">
+        <img src="assets/song_icon.svg" alt="">
+        <div class="song_info">
+          <li>${name}</li>
+          <li>SachinYadavAug20</li>
+        </div>
+        <img class="play_it_now" data-index="${i}" src="assets/play.svg" alt="play">
+      </div>`;
+      songList.innerHTML += element;
+   });
+}
+
+// Pause current song
+function pauseSong() {
+   audio.pause();
+   setPlayButton(true);
+}
+
+// Play selected song
+function playSong(index) {
+   const songNames = getSongNames();
+   songNumber = index;
+   audio.src = songs[songNumber];
+   audio.play();
+   setPlayButton(false);
+
+   const timeInfo = document.querySelector(".timeduration");
+   const songInfo = document.querySelector(".songinfo");
+   songInfo.textContent = songNames[songNumber];
+
+   audio.addEventListener("loadedmetadata", () => {
+      const duration = audio.duration;
+      const totalMin = String(Math.floor(duration / 60)).padStart(2, "0");
+      const totalSec = String(Math.floor(duration % 60)).padStart(2, "0");
+      const totalTime = `${totalMin}:${totalSec}`;
 
       audio.addEventListener("timeupdate", () => {
-         let time_played = audio.currentTime;
-         let mD = parseInt(time_played / 60);
-         let sD = parseInt(time_played - mD * 60);
-         if (mD < 10) { mD = `0${mD}` }
-         if (sD < 10) { sD = `0${sD}` }
-         time_info.innerHTML = `${mD}:${sD} / ${total_time}`;
-      })
+         const current = audio.currentTime;
+         const total = audio.duration;
+         const curMin = String(Math.floor(current / 60)).padStart(2, "0");
+         const curSec = String(Math.floor(current % 60)).padStart(2, "0");
+         timeInfo.textContent = `${curMin}:${curSec} / ${totalTime}`;
+         const _completion = (current / total) * 100;
+         seakbar_ball.style.left = `${_completion - 1}%`
+         seakbar_ball.previousElementSibling.style.width = `${_completion}%`
+      });
+   });
+   //eventlisterner for seakbar to have resoponce and forword and backord moves
+   seakbar.addEventListener("click", (e) => {
+      console.log(e.offsetX, e.target.getBoundingClientRect().width, e);
+      //bounding rectangle's width is total possible width and offsetX is the x where clicked
+      let where_clicked_percent = ((e.clientX-e.target.getBoundingClientRect().left) / e.target.getBoundingClientRect().width) * 100;
+      console.log(where_clicked_percent);
+      audio.currentTime = (audio.duration * (where_clicked_percent)) / 100;
    })
-   pauseBtn.addEventListener('click', () => {
-      playBtn.style.opacity = 1;
-      playBtn.style.pointerEvents = "auto";
-      pauseBtn.style.opacity = 0;
-      pauseBtn.style.pointerEvents = "none"
-      audio.pause();
-   })
-
 }
-main();
-list_songs();
-look_for_usr_song_choice();
+
+// Initialize player buttons
+function setupPlayerControls() {
+   playBtn.addEventListener("click", () => {
+      if (audio.src) {
+         audio.play();
+         setPlayButton(false);
+      } else {
+         playSong(songNumber);
+      }
+   });
+
+   pauseBtn.addEventListener("click", pauseSong);
+   previousBtn.addEventListener("click", () => {
+      songNumber--;
+      playSong(songNumber)
+   })
+   nextBtn.addEventListener("click", () => {
+      songNumber++;
+      playSong(songNumber);
+   })
+}
+
+// Detect user song clicks
+function setupSongChoice() {
+   document.querySelector(".songlist").addEventListener("click", e => {
+      if (e.target.classList.contains("play_it_now")) {
+         const index = parseInt(e.target.dataset.index);
+         pauseSong();
+         playSong(index);
+      }
+   });
+}
+
+// Initialize everything
+listSongs();
+setupPlayerControls();
+setupSongChoice();
+
