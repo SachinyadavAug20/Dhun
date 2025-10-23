@@ -58,6 +58,7 @@ const previousBtn = document.querySelector(".previous_song");
 const nextBtn = document.querySelector(".next_song");
 const seakbar = document.querySelector(".seakbar");
 const seakbar_ball = document.querySelector(".seakbar").querySelector(".circle");
+const hamburger = document.querySelector(".hamburger");
 
 // Default button states
 function setPlayButton(active) {
@@ -94,7 +95,7 @@ function listSongs() {
         <img src="assets/song_icon.svg" alt="">
         <div class="song_info">
           <li>${name}</li>
-          <li>SachinYadavAug20</li>
+          <li class="to_my_git_profile" >SachinYadavAug20</li>
         </div>
         <img class="play_it_now" data-index="${i}" src="assets/play.svg" alt="play">
       </div>`;
@@ -141,7 +142,7 @@ function playSong(index) {
    seakbar.addEventListener("click", (e) => {
       console.log(e.offsetX, e.target.getBoundingClientRect().width, e);
       //bounding rectangle's width is total possible width and offsetX is the x where clicked
-      let where_clicked_percent = ((e.clientX-e.target.getBoundingClientRect().left) / e.target.getBoundingClientRect().width) * 100;
+      let where_clicked_percent = ((e.clientX - e.target.getBoundingClientRect().left) / e.target.getBoundingClientRect().width) * 100;
       console.log(where_clicked_percent);
       audio.currentTime = (audio.duration * (where_clicked_percent)) / 100;
    })
@@ -161,10 +162,20 @@ function setupPlayerControls() {
    pauseBtn.addEventListener("click", pauseSong);
    previousBtn.addEventListener("click", () => {
       songNumber--;
+      console.log(songNumber)
+      if(songNumber==-1){
+         songNumber=songs.length-1;
+      }
+      console.log(songNumber)
       playSong(songNumber)
    })
    nextBtn.addEventListener("click", () => {
       songNumber++;
+      console.log(songNumber)
+      if(songNumber==songs.length){
+         songNumber=0;
+      }
+      console.log(songNumber)
       playSong(songNumber);
    })
 }
@@ -179,9 +190,47 @@ function setupSongChoice() {
       }
    });
 }
+let hamburger_status = false;
+hamburger.addEventListener("click", () => {
+   if (hamburger_status == false) {
+      document.querySelector(".left").style.transform = `translateX(${0}%)`;
+      document.querySelector(".left").style.width = `7000vw`;
+      document.querySelector(".right").style.width = `140px`;
+      document.querySelector(".right").style.overflow = `hidden`;
+      document.querySelector(".playmenu").style.left = '2%';
+      document.querySelector(".playmenu").style.width = `90%`;
+      document.querySelector(".hamburger").firstElementChild.style.opacity=0;
+      document.querySelector(".hamburger").lastElementChild.style.opacity=1;
+      hamburger_status = true;
+   }
+   else if (hamburger_status == true) {
+      document.querySelector(".left").style.transform = `translateX(${-150}%)`;
+      document.querySelector(".left").style.width = `20vw`;
+      document.querySelector(".right").style.width = `10000%`;
+      document.querySelector(".right").style.overflow = `hidden`;
+      document.querySelector(".playmenu").style.left = '2%';
+      document.querySelector(".playmenu").style.width = `90%`;
+      document.querySelector(".hamburger").lastElementChild.style.opacity=0;
+      document.querySelector(".hamburger").firstElementChild.style.opacity=1;
+      hamburger_status = false;
 
+   }
+})
+if (hamburger.style.display!="none") {
+   document.querySelector(".searchBox").firstElementChild.addEventListener("focus", () => {
+      document.querySelector(".usr-in").style.display = "none";
+   })
+   document.querySelector(".searchBox").firstElementChild.addEventListener("blur", () => {
+      document.querySelector(".usr-in").style.display = "flex";
+   })
+
+}
 // Initialize everything
 listSongs();
+document.querySelectorAll(".to_my_git_profile").forEach((a)=>{a.addEventListener("click",()=>{
+   window.open("https://github.com/SachinyadavAug20/Dhun", "_blank");}
+)});
+
 setupPlayerControls();
 setupSongChoice();
 

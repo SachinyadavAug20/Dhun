@@ -13,9 +13,12 @@
 <body>
    <div>
       <nav class="navbar flex roundBorder">
+         <div class="hamburger">
+            <img class="hamburgerimg" src="assets/svgviewer-output.svg" alt="hamburger">
+            <img src="assets/cross.svg" alt="cross">
+         </div>
          <img class="click-to-home pointer" src="assets/logo.svg" alt="Dhun">
-         <img class="pointer click-to-home" src="assets/home.svg" alt="home">
-
+         <img class="pointer click-to-home homeBtn" src="assets/home.svg" alt="home">
          <div class="flex searchBox center">
             <input type="text" name="keyword" value="" placeholder=" 🔍 Search">
          </div>
@@ -61,7 +64,7 @@
                <div class="popular_songs">
                   <h5 class="on-hover-underline">Popular Songs</h5>
                   <ul class="songlist">
-                                  
+
                   </ul>
                </div>
             </div>
@@ -97,17 +100,41 @@
                   </ul>
                </div>
 
+               <div class="songcard">
+                  <img class="album-img" src="assets/cardimg1.png" alt="img">
+                  <img class="play" src="assets/playbutton.svg" alt="play">
+                  <h3 class="pointer on-hover-underline">Album name</h3>
+                  <ul class="list-style-none artist-names">
+                     <li class="pointer click-to-home on-hover-underline">tag1,</li>
+                     <li class="pointer click-to-home on-hover-underline">tag2,</li>
+                     <li class="pointer click-to-home on-hover-underline">tag3</li>
+                  </ul>
+               </div>
+
+
+               <div class="songcard">
+                  <img class="album-img" src="assets/cardimg1.png" alt="img">
+                  <img class="play" src="assets/playbutton.svg" alt="play">
+                  <h3 class="pointer on-hover-underline">Album name</h3>
+                  <ul class="list-style-none artist-names">
+                     <li class="pointer click-to-home on-hover-underline">tag1,</li>
+                     <li class="pointer click-to-home on-hover-underline">tag2,</li>
+                     <li class="pointer click-to-home on-hover-underline">tag3</li>
+                  </ul>
+               </div>
+
+
             </div>
          </div>
          <div class="playmenu">
-               <div class="seakbar">
-                  <div class="trailCircle">
-                     
-                  </div>
-                  <div class="circle">
-                     
-                  </div>
+            <div class="seakbar">
+               <div class="trailCircle">
+
                </div>
+               <div class="circle">
+
+               </div>
+            </div>
             <div class="songinfo">
                Song name
             </div>
@@ -122,6 +149,10 @@
             <div class="timeduration">
                00:00 / 00:00
             </div>
+               <div class="volume_control">
+                  <input type="range" class="volume_seakbar" name="volume_seakbar" value="">
+                  <img src="assets/volume_icon.svg" alt="volume">       
+               </div>
          </div>
       </div>
 

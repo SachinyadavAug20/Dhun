@@ -5,10 +5,14 @@
 ---
 
 ## Screenshot
-Here’s a preview of the current state (as of 22-10-2025):
+Here’s a preview of the current state (as of 23-10-2025):
+
+![Dhun Screenshot](assets/screenshot/23-10-25.gif)
+
+
+as of 22-10-2025:
 
 ![Dhun Screenshot](assets/screenshot/22-10-25.png)
-
 
 as of 21-10-2025:
 
