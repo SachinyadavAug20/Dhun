@@ -163,8 +163,8 @@ function setupPlayerControls() {
    previousBtn.addEventListener("click", () => {
       songNumber--;
       console.log(songNumber)
-      if(songNumber==-1){
-         songNumber=songs.length-1;
+      if (songNumber == -1) {
+         songNumber = songs.length - 1;
       }
       console.log(songNumber)
       playSong(songNumber)
@@ -172,8 +172,8 @@ function setupPlayerControls() {
    nextBtn.addEventListener("click", () => {
       songNumber++;
       console.log(songNumber)
-      if(songNumber==songs.length){
-         songNumber=0;
+      if (songNumber == songs.length) {
+         songNumber = 0;
       }
       console.log(songNumber)
       playSong(songNumber);
@@ -199,8 +199,8 @@ hamburger.addEventListener("click", () => {
       document.querySelector(".right").style.overflow = `hidden`;
       document.querySelector(".playmenu").style.left = '2%';
       document.querySelector(".playmenu").style.width = `90%`;
-      document.querySelector(".hamburger").firstElementChild.style.opacity=0;
-      document.querySelector(".hamburger").lastElementChild.style.opacity=1;
+      document.querySelector(".hamburger").firstElementChild.style.opacity = 0;
+      document.querySelector(".hamburger").lastElementChild.style.opacity = 1;
       hamburger_status = true;
    }
    else if (hamburger_status == true) {
@@ -210,13 +210,13 @@ hamburger.addEventListener("click", () => {
       document.querySelector(".right").style.overflow = `hidden`;
       document.querySelector(".playmenu").style.left = '2%';
       document.querySelector(".playmenu").style.width = `90%`;
-      document.querySelector(".hamburger").lastElementChild.style.opacity=0;
-      document.querySelector(".hamburger").firstElementChild.style.opacity=1;
+      document.querySelector(".hamburger").lastElementChild.style.opacity = 0;
+      document.querySelector(".hamburger").firstElementChild.style.opacity = 1;
       hamburger_status = false;
 
    }
 })
-if (hamburger.style.display!="none") {
+if (hamburger.style.display != "none") {
    document.querySelector(".searchBox").firstElementChild.addEventListener("focus", () => {
       document.querySelector(".usr-in").style.display = "none";
    })
@@ -225,12 +225,44 @@ if (hamburger.style.display!="none") {
    })
 
 }
-// Initialize everything
+
 listSongs();
-document.querySelectorAll(".to_my_git_profile").forEach((a)=>{a.addEventListener("click",()=>{
-   window.open("https://github.com/SachinyadavAug20/Dhun", "_blank");}
-)});
+document.querySelectorAll(".to_my_git_profile").forEach((a) => {
+   a.addEventListener("click", () => {
+      window.open("https://github.com/SachinyadavAug20/Dhun", "_blank");
+   }
+   )
+});
 
 setupPlayerControls();
 setupSongChoice();
+let volumeSeakBar = document.querySelector(".volume_control").firstElementChild, volumeSeakBar_visibe = false, muted = false;
+document.querySelector(".volumeBtn123").addEventListener("click", (e) => {
+
+   if (volumeSeakBar_visibe == false) {
+      volumeSeakBar.style.display = "block";
+      volumeSeakBar_visibe = true;
+      e.target.src = e.target.src.replace("volume_icon.svg", "volume0.svg");
+      console.log(volumeSeakBar);
+      volumeSeakBar.value = 0;
+      audio.volume = 0;
+   }
+   else if (volumeSeakBar_visibe == true) {
+      volumeSeakBar.value = 10;
+      audio.volume = 0.1;
+      e.target.src = e.target.src.replace("volume0.svg", "volume_icon.svg");
+      volumeSeakBar.style.display = "none";
+      volumeSeakBar_visibe = false;
+   }
+
+
+})
+document.querySelector(".volume_seakbar").addEventListener("change", (e) => {
+   // console.log(e,e.target,e.target.value)
+   document.querySelector(".volumeBtn123").src = document.querySelector(".volumeBtn123").src.replace("volume0.svg", "volume_icon.svg");
+   audio.volume = e.target.value / 100;
+   if (audio.volume == 0) {
+      muted = true;
+   }
+})
 
