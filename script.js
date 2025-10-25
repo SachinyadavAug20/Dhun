@@ -33,22 +33,26 @@ for (const a of playbutton) {
 }
 
 // Get all song file paths
-function getSongs() {
-   return [
-      "songs/Blindfold.mp3",
-      "songs/Electronic.mp3",
-      "songs/Hit The Ground.mp3",
-      "songs/J Pop.mp3",
-      "songs/MONTAGEM INDIA.mp3",
-      "songs/Missing Life.mp3",
-      "songs/Witch House.mp3"
-   ];
+async function getSongs(folder) {
+   let a = await fetch(`http://192.168.0.105:8000/songs/${folder}/`);
+   let resoponce = await a.text();
+   // console.log(resoponce);
+   let tempDiv = document.createElement("div");
+   tempDiv.innerHTML = resoponce;
+   let anchors = tempDiv.querySelectorAll("ul li a");
+   let Songs = [];
+   anchors.forEach(a => {
+      if (a.href.endsWith(".mp3")) {
+         Songs.push("http://192.168.0.105:8000/" + `songs/${folder}/` + a.getAttribute("href"));
+      }
+   });
+   return Songs;
 }
 
 // Global state
+let currentfolder = "hindi";
 let songNumber = 0;
 let audio = new Audio();
-let songs = getSongs();
 
 // UI buttons
 const playContainer = document.querySelector(".play_song_container");
@@ -77,15 +81,16 @@ function setPlayButton(active) {
 setPlayButton(true);//this is deafult case in start all pause
 
 // Get song names (remove path + extension)
-function getSongNames() {
-   return getSongs().map(path => {
-      return path.substring(path.lastIndexOf("/") + 1, path.lastIndexOf(".mp3"));
+async function getSongNames() {
+   let songs = await getSongs(currentfolder);
+   return songs.map(path => {
+      return path.substring(path.lastIndexOf("/") + 1, path.lastIndexOf(".mp3")).replaceAll("%20", " ");
    });
 }
 
 // List songs in UI
-function listSongs() {
-   const songNames = getSongNames();
+async function listSongs() {
+   const songNames = await getSongNames();
    const songList = document.querySelector(".songlist");
    songList.innerHTML = "";
 
@@ -110,8 +115,9 @@ function pauseSong() {
 }
 
 // Play selected song
-function playSong(index) {
-   const songNames = getSongNames();
+async function playSong(index) {
+   const songNames = await getSongNames();
+   let songs = await getSongs(currentfolder);
    songNumber = index;
    audio.src = songs[songNumber];
    audio.play();
@@ -149,7 +155,8 @@ function playSong(index) {
 }
 
 // Initialize player buttons
-function setupPlayerControls() {
+async function setupPlayerControls() {
+   let songs = await getSongs(currentfolder);
    playBtn.addEventListener("click", () => {
       if (audio.src) {
          audio.play();
@@ -265,4 +272,54 @@ document.querySelector(".volume_seakbar").addEventListener("change", (e) => {
       muted = true;
    }
 })
+//make folders audo apperar
+async function getplaylists() {
+   let a = await fetch("http://192.168.0.105:8000/songs/")
+   let text = await a.text();
+   const matches = text.match(/href="([^"]*\/)"/g);
+   let playlist = [];
+   if (matches) {
+      matches.forEach(m => {
+         const folder = m.match(/href="([^"]*\/)"/)[1].replace("/", "");
+         playlist.push(folder);
+      });
+   }
+   return playlist;
+}
+async function display_cards() {
+   let playlist = await getplaylists();
+   playlist.forEach(async (e) => {
+      let metadata = await fetch(`http://192.168.0.105:8000/songs/${e}/info.json`);
+      let data = await metadata.text();
+      let coveradd=data.slice(data.indexOf("cover")+"cover".length+2,data.lastIndexOf(",")-1);
+      console.log(coveradd);
+      let title = data.slice(data.indexOf("title") + "title".length + 2, data.indexOf(",") - 1);
+      let discripion = data.slice(data.indexOf("discription") + "discription".length + 2, data.lastIndexOf("\""));
+      let card = document.createElement("div");
+      card.classList.add("songcard");
+      card.dataset.folder = e;
+      card.innerHTML = `
+                  <img class="album-img" src="${coveradd}" alt="img">
+                  <img class="play" src="assets/playbutton.svg" alt="play">
+                  <h3 class="pointer on-hover-underline">${title}</h3>
+                  <ul class="list-style-none artist-names">
+                     <li class="pointer click-to-home on-hover-underline">${discripion}</li>
+                     <li class="pointer click-to-home on-hover-underline"></li>
+                     <li class="pointer click-to-home on-hover-underline"></li>
+                  </ul>`;
+      document.querySelector(".songcard-container").appendChild(card);
+
+      let songcard = document.querySelector(`[data-folder="${e}"]`);
+      songcard.addEventListener("click", (a) => {
+         console.log(a.currentTarget);
+         currentfolder = a.currentTarget.dataset.folder;
+         playSong(songNumber);
+         listSongs();
+         setupPlayerControls();
+         setupSongChoice();
+      })
+   });
+}
+getplaylists();
+display_cards();
 

@@ -16,6 +16,7 @@
 
         :root {
            --a: 0;
+           --b:0;
         }
 
 
@@ -320,9 +321,12 @@
            display: flex;
            flex-direction: row;
            flex-wrap: wrap;
-           padding: 12px 19px;
+           padding: 10px 10px;
+           gap: 10px;
            width: 95%;
            max-height: 65.5vh;
+           overflow-y: auto;
+
         }
 
         .songcard {
@@ -358,13 +362,14 @@
            width: 45px;
            left: 63%;
            top: 48%;
-           opacity: 0;
+           opacity: var(--b);
            transform: all 0.4s ease-in-out;
         }
 
         .songcard h3 {
            place-self: flex-start;
            font-weight: 600;
+           white-space: nowrap;
            font-size: 18px;
            color: white;
            padding: 2px;
@@ -428,6 +433,12 @@
               position: relative;
               right: 2%;
               bottom: 16%;
+           }
+           .songcard:hover{
+              --b:1;
+           }
+           .songcard-container  .songcard img.play{
+              transform: translateY(-5px);
            }
         }
 
@@ -608,6 +619,9 @@
               width: 20px;
               padding: 1px;
            }
+           .playmenu{
+               margin-bottom: 5%;
+           }
 
            .playmenu img {
               width: 30px;
@@ -628,8 +642,27 @@
            .songcard-container {
               justify-content: flex-start;
               align-items: center;
-              padding: 12px 5px;
+              padding: 1px 0px;
+              width: 98vw;
+              max-height:150vw;
               place-self: start;
+              overflow-y: unset;
+           }
+           .songcard{
+               white-space: unset;
+           }
+           .right{
+               height: 10%;
+              overflow-y: auto;
+              overflow-x: hidden;
+              max-height: 80%;
+           }
+           .left{
+               padding-bottom: 30%;
+           }
+           .songcard{
+
+              margin: 10px 5px;
            }
 
            .songcard:last-child {
@@ -738,10 +771,11 @@
            bottom: 3%;
         }
 
-        .volume_control input{
+        .volume_control input {
            cursor: pointer;
            opacity: 0.89;
         }
+
         .volume_control {
            display: flex;
            position: relative;
