@@ -26,21 +26,6 @@ Just drop your music inside the **/songs/** directory with a simple structure, a
 
 ---
 
-### 📁 Folder Structure
-
-├── songs/
-│   ├── Chill/
-│   │   ├── song1.mp3
-│   │   ├── song2.mp3
-│   │   └── info.json   ← Playlist title, desc, cover
-│   ├── NCS/
-│   │   ├── Blindfold.mp3
-│   │   ├── Electronic.mp3
-│   │   └── info.json
-│   └── Witch House/
-│       ├── Witch Hit.mp3
-│       └── info.json
-
 Each playlist folder must contain:
 
 - ✅ MP3 audio files  
@@ -63,19 +48,17 @@ Select a song to start playback
 
 Use the bottom player controls to:
 
-⏯️ Play / Pause
+▶️ Play / Pause
 
 ⏭️ Next Song
 
 ⏮️ Previous Song
 
-🔉 Adjust Volume
-
-🔁 Loop toggle
+🔊 Adjust Volume
 
 
 # Screenshot
-Here’s a preview of the current state (as of 25-10-2025):
+Here’s a preview of the current state (last time modified on 25-10-2025):
 
 ![Dhun Screenshot](assets/screenshot/25-10-25.gif)
 
