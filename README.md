@@ -1,7 +1,5 @@
 # Dhun – Web Music Player 🎵
 
-# Dhun – Web Music Player 🎵
-
 Dhun is a lightweight **Spotify-style** web music player built using only **HTML, CSS, and JavaScript** — no backend frameworks!  
 It dynamically loads playlists from a local directory and gives you a clean and smooth listening experience.
 
@@ -30,15 +28,18 @@ Just drop your music inside the **/songs/** directory with a simple structure, a
 
 ### 📁 Folder Structure
 
-songs/
-├── playlist1/
-│ ├── track1.mp3
-│ ├── track2.mp3
-│ └── info.json
-├── playlist2/
-│ ├── another_song.mp3
-│ └── info.json
-...
+├── songs/
+│   ├── Chill/
+│   │   ├── song1.mp3
+│   │   ├── song2.mp3
+│   │   └── info.json   ← Playlist title, desc, cover
+│   ├── NCS/
+│   │   ├── Blindfold.mp3
+│   │   ├── Electronic.mp3
+│   │   └── info.json
+│   └── Witch House/
+│       ├── Witch Hit.mp3
+│       └── info.json
 
 Each playlist folder must contain:
 
@@ -51,6 +52,7 @@ Example `info.json`:
   "title": "NCS Hits",
   "discription": "Best No Copyright Music!"
 }
+```
 🎧 Play Music
 
 Open Dhun in your browser
